@@ -1,19 +1,44 @@
 import styled from 'styled-components';
 import React from 'react';
+import { useDispatch,useSelector } from 'react-redux';
+// import {useHistory} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
+// useNavigate is latest used for Browser's History
+//Dispatch allows action to our store.js
+//Selector will allow us to retrieve from store.js
 import {auth,provider} from '../firebase';
+import {selectUserName,
+   selectUserPhoto,
+   setUserLoginDetails }
+    from '../features/user/userSlice';
 
 
 const Header = (props) => {
+  const dispatch = useDispatch();
+  const navigate= useNavigate();
+  const userName = useSelector(selectUserName);
+  const userPhoto = useSelector(selectUserPhoto);
+
   const handleAuth = () => {
     auth
     .signInWithPopup(provider)
     .then((result) => {
-      console.log(result);
+      setUser(result.user);
       
     }).catch((error) => {
       alert(error.message);
     });
+  };
+  const setUser = (user) => {
+    dispatch(
+      setUserLoginDetails({
+        name: user.displayName,
+        email:user.email,
+        photo:user.photoURL
+
+    })
+    );
   };
   
 
@@ -23,6 +48,11 @@ const Header = (props) => {
         <Logo>
             <img src='/Images/logo.svg' alt='Disney+'/>
         </Logo>
+        {
+          //If user not login show login button if user login than show photo
+          !userName ? 
+          (<Login onClick={handleAuth}>Login</Login>) : (
+          <>
         <NavMenu>
           <a href='/home'>
             <img src='/Images/home-icon.svg' alt='HOME'/>
@@ -49,9 +79,14 @@ const Header = (props) => {
             <span>SERIES</span>
           </a>
         </NavMenu>
-        <Login onClick={handleAuth} >LOGIN</Login>
+        <UserImg src = {userPhoto} alt = {userName} />
+        </>
+        )
+        };
+
+        {/* <Login onClick={handleAuth} >LOGIN</Login> */}
     </Nav>
-  )
+  );
 };
 const Nav = styled.nav`
 position:fixed;
@@ -74,7 +109,6 @@ margin-top:4px;
 max-height:70px;
 font-size:0;
 display:inline-block;
-
 img{
     display:block;
     width:100%;
@@ -156,11 +190,13 @@ transition:all 0.2s ease 0s;
 &:hover{
 background-color:#f9f9f9;
 color:#000;
-${'' /* cursor:pointer; */}
+
 }
 
 
 
 `;
+const UserImg = styled.img`
+height:100%;`;
 
-export default Header
+export default Header;
