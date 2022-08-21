@@ -5,12 +5,14 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAUnmmEZ6bclBa4orArKqSACfbY4qZ0jxs",
-  authDomain: "clone-series.firebaseapp.com",
-  projectId: "clone-series",
-  storageBucket: "clone-series.appspot.com",
-  messagingSenderId: "576865272726",
-  appId: "1:576865272726:web:26f04f3730b3b668d313b7"
+  apiKey: "AIzaSyAsh-AtUIlhqfRz4CFp2S2vPOKteZjsxuk",
+  authDomain: "clones-8460e.firebaseapp.com",
+  projectId: "clones-8460e",
+  storageBucket: "clones-8460e.appspot.com",
+  messagingSenderId: "155040847174",
+  appId: "1:155040847174:web:b37d181fd0a8bfb958c147",
+  measurementId: "G-B7HQ03JQ6G"
+ 
 };
   const firebaseapp = firebase.initializeApp(firebaseConfig);
   const db = firebaseapp.firestore();
