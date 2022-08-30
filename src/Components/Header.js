@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+// useNavigate will use to tell about events happend in the history..
 import { auth, provider } from "../firebase";
 import { selectUserName, selectUserPhoto, setUserLoginDetails, setSignOutState } from '../features/user/userSlice';
 import { useEffect } from 'react';
@@ -10,7 +11,7 @@ const Header = (props) => {
     const navigate = useNavigate()
     const userName = useSelector(selectUserName)
     const userPhoto = useSelector(selectUserPhoto)
-
+//we use here useEffect Hook
     useEffect(() => {
         auth.onAuthStateChanged(async (user) => {
             if (user) {
@@ -58,7 +59,7 @@ const Header = (props) => {
                     <>
                         <NavMenu>
                             <a href="/home">
-                                <img src="/images/home-icon.svg" alt="HOME" />
+                                 <img src="/images/home-icon.svg" alt="HOME" />
                                 <span>HOME</span>
                             </a>
                             <a href="/search">
