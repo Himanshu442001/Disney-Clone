@@ -9,7 +9,7 @@ const ImageSlider = (props) => {
   let settings = {
     dots:true,
     infinite:true,
-    speed:500,
+    speed:400,
     slidesToShow:1,
     slidesToScroll:1,
     autoplay:true,
@@ -77,5 +77,31 @@ li.slick-active button:before{
 }
 `;
 const Wrap = styled.div`
+border-radius:4px;
+cursor:pointer;
+position:relative;
+
+a{
+  border-radius:4px;
+  box-shadow:rgb(0 0 0 / 69%)  0px 26px -10px ,rgb(0 0 0 / 73%) 0px 16px 10px -10px; 
+  cursor:pointer;
+  display:block;
+  position:relative;
+  padding:4px;
+
+  img{
+    width:100%;
+    height:100%;
+
+  }
+  &:hover{
+    padding:0px;
+    ${'' /* border:4px solid rgb(249 249 249 0.8);  */}
+    border:2px solid white;
+    transition-duration:300ms 
+  }
+
+}
+
 `;
 export default ImageSlider;
